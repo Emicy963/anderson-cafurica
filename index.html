@@ -3,894 +3,1132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emicy963 | Dev Python/Fullstack - PyNerd Angola</title>
+    <title>Anderson Cafurica | Backend Developer & CTO · Kombinu</title>
+    <meta name="description" content="Backend Developer especializado em Python, Django e APIs REST. CTO & Co-Fundador da Kombinu EdTech. 6.º lugar no CodePoint by Mirantes. Huambo, Angola.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        'mono': ['Monaco', 'Menlo', 'Ubuntu Mono', 'monospace'],
+                        'mono': ['JetBrains Mono', 'Monaco', 'monospace'],
                         'sans': ['Inter', 'system-ui', 'sans-serif']
                     },
                     animation: {
                         'pulse-glow': 'pulseGlow 2s infinite',
                         'float': 'float 3s ease-in-out infinite',
-                        'typing': 'typing 3.5s steps(40, end), blink 1s infinite',
+                        'blink': 'blink 1s infinite',
                         'slide-up': 'slideUp 0.6s ease-out',
-                        'fade-in': 'fadeIn 0.8s ease-out'
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'count-up': 'countUp 1.5s ease-out forwards',
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Monaco&display=swap');
-        
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(74, 222, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+            0%   { box-shadow: 0 0 0 0 rgba(74,222,128,.7); }
+            70%  { box-shadow: 0 0 0 12px rgba(74,222,128,0); }
+            100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
         }
-        
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
         }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            0%,100% { opacity: 1; }
+            50%      { opacity: 0; }
         }
-
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
-            to { opacity: 1; }
+            to   { opacity: 1; }
         }
-        
-        .gradient-text { 
+
+        .gradient-text {
             background: linear-gradient(to right, #4ade80, #22d3ee);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .glass { 
-            backdrop-filter: blur(10px); 
-            background: rgba(15, 23, 42, 0.8); 
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(15,23,42,.8);
         }
-        
         .code-terminal {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border: 1px solid rgba(74, 222, 128, 0.3);
+            border: 1px solid rgba(74,222,128,.3);
         }
-        
         .typing-cursor::after {
             content: "|";
             animation: blink 1s infinite;
             color: #4ade80;
         }
-
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            transform: translateY(24px);
+            transition: all .6s ease-out;
         }
-
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .skill-bar {
             background: linear-gradient(90deg, #4ade80, #22d3ee);
             height: 4px;
             border-radius: 2px;
             transform-origin: left;
             transform: scaleX(0);
-            animation: fillBar 2s ease-out forwards;
+            transition: transform 1.2s ease-out;
         }
-
-        @keyframes fillBar {
-            to { transform: scaleX(1); }
+        .skill-bar.animate {
+            transform: scaleX(1);
         }
-
         .project-card {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all .3s ease;
+            border: 1px solid rgba(74,222,128,.2);
         }
-
         .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(74, 222, 128, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-6px);
+            border-color: rgba(74,222,128,.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,.4);
         }
+        .exp-card {
+            border-left: 3px solid #4ade80;
+            transition: all .3s ease;
+        }
+        .exp-card:hover {
+            border-left-color: #22d3ee;
+            background: rgba(74,222,128,.05);
+        }
+        .stat-card {
+            border: 1px solid rgba(74,222,128,.2);
+            transition: all .3s ease;
+        }
+        .stat-card:hover {
+            border-color: rgba(74,222,128,.5);
+            transform: translateY(-4px);
+        }
+        .badge-gold {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #1a1a2e;
+        }
+        html { scroll-behavior: smooth; }
+
+        /* Mobile menu */
+        #mobile-menu { display: none; }
+        #mobile-menu.open { display: flex; }
     </style>
 </head>
 <body class="bg-slate-900 text-white font-sans antialiased">
-    <!-- Navbar -->
-    <nav class="glass fixed w-full top-0 z-50 border-b border-green-500/20">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full flex items-center justify-center">
-                    <span class="font-mono font-bold text-slate-900">E</span>
-                </div>
-                <div>
-                    <span class="font-mono font-bold text-lg gradient-text">Emicy963</span>
-                    <div class="text-xs text-gray-400">PyNerd Angola</div>
-                </div>
+
+<!-- ═══════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════ -->
+<nav class="glass fixed w-full top-0 z-50 border-b border-green-500/20">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="font-mono font-bold text-slate-900 text-sm">AC</span>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#sobre" class="hover:text-green-400 transition-colors">Sobre</a>
-                <a href="#habilidades" class="hover:text-green-400 transition-colors">Habilidades</a>
-                <a href="#projetos" class="hover:text-green-400 transition-colors">Projetos</a>
-                <a href="#servicos" class="hover:text-green-400 transition-colors">Serviços</a>
-                <a href="#contato" class="hover:text-green-400 transition-colors">Contato</a>
+            <div>
+                <span class="font-mono font-bold text-lg gradient-text">Emicy963</span>
+                <div class="text-xs text-gray-400">PyNerd Angola · CTO Kombinu</div>
             </div>
-            <a href="#contato" class="px-6 py-2 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 rounded-lg font-semibold transition-all transform hover:-translate-y-0.5">
+        </div>
+        <!-- Desktop nav -->
+        <div class="hidden md:flex space-x-6 text-sm">
+            <a href="#sobre"       class="hover:text-green-400 transition-colors">Sobre</a>
+            <a href="#experiencia" class="hover:text-green-400 transition-colors">Experiência</a>
+            <a href="#habilidades" class="hover:text-green-400 transition-colors">Skills</a>
+            <a href="#projetos"    class="hover:text-green-400 transition-colors">Projetos</a>
+            <a href="#servicos"    class="hover:text-green-400 transition-colors">Serviços</a>
+            <a href="#contato"     class="hover:text-green-400 transition-colors">Contacto</a>
+        </div>
+        <div class="flex items-center space-x-3">
+            <a href="#contato" class="hidden md:inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 rounded-lg font-semibold text-sm transition-all transform hover:-translate-y-0.5">
                 Contratar
             </a>
+            <!-- Hamburger -->
+            <button id="hamburger" class="md:hidden p-2 text-gray-400 hover:text-green-400 transition-colors" aria-label="Menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
-    </nav>
+    </div>
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu" class="md:hidden flex-col bg-slate-900/95 border-t border-green-500/20 px-4 py-4 space-y-3 text-sm">
+        <a href="#sobre"       class="block py-2 hover:text-green-400 transition-colors">Sobre</a>
+        <a href="#experiencia" class="block py-2 hover:text-green-400 transition-colors">Experiência</a>
+        <a href="#habilidades" class="block py-2 hover:text-green-400 transition-colors">Skills</a>
+        <a href="#projetos"    class="block py-2 hover:text-green-400 transition-colors">Projetos</a>
+        <a href="#servicos"    class="block py-2 hover:text-green-400 transition-colors">Serviços</a>
+        <a href="#contato"     class="block py-2 hover:text-green-400 transition-colors">Contacto</a>
+        <a href="#contato"     class="block w-full text-center mt-2 px-5 py-2 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-semibold">Contratar</a>
+    </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-        <div class="absolute top-20 right-10 w-72 h-72 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-float"></div>
-        <div class="absolute bottom-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-float" style="animation-delay: -1s;"></div>
-        
-        <div class="container mx-auto px-4 py-16 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-mono mb-4">
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+    <div class="absolute top-20 right-10 w-80 h-80 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl opacity-8 animate-float"></div>
+    <div class="absolute bottom-20 left-10 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-8 animate-float" style="animation-delay:-1s"></div>
+
+    <div class="container mx-auto px-4 py-16 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left: text -->
+            <div class="space-y-7">
+                <div class="flex flex-wrap gap-2">
+                    <span class="inline-block bg-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-sm font-mono">
                         <i class="fas fa-code mr-2"></i>PyNerd Angola
+                    </span>
+                    <span class="inline-block badge-gold px-4 py-1.5 rounded-full text-sm font-semibold">
+                        🏆 6.º CodePoint by Mirantes
+                    </span>
+                </div>
+
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                    Olá, sou <span class="gradient-text">Anderson</span><br>
+                    <span class="text-3xl md:text-4xl text-gray-300 font-semibold">Backend Developer & CTO</span>
+                </h1>
+
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Especializado em <span class="text-green-400 font-semibold">Python · Django · APIs REST</span>. Co-fundador e CTO da
+                    <span class="text-cyan-400 font-semibold">Kombinu EdTech</span>, com projetos reais em produção,
+                    100+ testes automatizados e pipelines CI/CD. Em transição para <span class="text-purple-400 font-semibold">ML Engineering</span>.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#projetos" class="px-8 py-3.5 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold text-center transition-all transform hover:-translate-y-1 animate-pulse-glow text-sm">
+                        Ver Projetos <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#contato" class="px-8 py-4 bg-slate-800 border border-green-500/30 rounded-lg font-bold text-center hover:bg-slate-700 transition-all">
+                        Falar Comigo
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-map-marker-alt text-green-400"></i>
+                        <span>Huambo, Angola</span>
                     </div>
-                    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-                        Olá, sou <span class="gradient-text">Emicy963</span><br>
-                        <span class="text-3xl md:text-4xl text-gray-300">Criador de Soluções Digitais</span>
-                    </h1>
-                    <p class="text-xl text-gray-300 leading-relaxed">
-                        Dev Python/Fullstack apaixonado por tecnologia, especializado em transformar ideias em soluções digitais inovadoras. Fundador da PyNerd Angola.
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-400">Disponível para projectos</span>
+                    </div>
+                    <a href="https://github.com/Emicy963" target="_blank" class="flex items-center space-x-2 hover:text-green-400 transition-colors">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/Emicy963</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: terminal -->
+            <div class="code-terminal rounded-xl overflow-hidden shadow-2xl">
+                <div class="flex items-center justify-between px-4 py-3 bg-slate-800 border-b border-green-500/20">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div class="text-xs text-gray-400 font-mono">anderson_cafurica.py</div>
+                    <div class="text-xs text-gray-500">Python 3.12</div>
+                </div>
+                <div class="p-6 font-mono text-sm space-y-1.5 leading-relaxed">
+                    <div class="text-gray-500"># CTO · Backend Dev · ML Engineer (transitioning)</div>
+                    <div class="mt-2"><span class="text-purple-400">class</span> <span class="text-cyan-400">AndersonCafurica</span><span class="text-yellow-300">:</span></div>
+                    <div class="ml-4"><span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span><span class="text-yellow-300">(self):</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">role</span>     <span class="text-gray-400">=</span> <span class="text-green-300">"Backend Developer &amp; CTO"</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">startup</span>  <span class="text-gray-400">=</span> <span class="text-green-300">"Kombinu EdTech"</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">stack</span>    <span class="text-gray-400">=</span> <span class="text-yellow-300">[</span><span class="text-green-300">"Python"</span><span class="text-gray-400">,</span> <span class="text-green-300">"Django"</span><span class="text-gray-400">,</span> <span class="text-green-300">"DRF"</span><span class="text-gray-400">,</span> <span class="text-green-300">"FastAPI"</span><span class="text-yellow-300">]</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">tests</span>    <span class="text-gray-400">=</span> <span class="text-yellow-300">102</span>  <span class="text-gray-500"># automated tests, InfoStore</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">codepoint</span> <span class="text-gray-400">=</span> <span class="text-green-300">"6th / 50+ startups 🏆"</span></div>
+                    <div class="ml-8"><span class="text-orange-400">self</span><span class="text-gray-400">.</span><span class="text-cyan-300">location</span> <span class="text-gray-400">=</span> <span class="text-green-300">"Huambo, Angola 🇦🇴"</span></div>
+                    <div class="ml-4 mt-2"><span class="text-purple-400">def</span> <span class="text-cyan-400">objetivo</span><span class="text-yellow-300">(self):</span></div>
+                    <div class="ml-8"><span class="text-purple-400">return</span> <span class="text-green-300">"Trabalho remoto internacional 🌍"</span></div>
+                    <div class="mt-3 text-gray-500">─────────────────────────────</div>
+                    <div class="text-green-400"><span class="text-gray-500">&gt;&gt;&gt; </span>AndersonCafurica().objetivo()</div>
+                    <div class="text-cyan-300">'Trabalho remoto internacional 🌍'</div>
+                    <div class="typing-cursor text-green-400"><span class="text-gray-500">&gt;&gt;&gt; </span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="stat-card glass rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold gradient-text">102+</div>
+                <div class="text-xs text-gray-400 mt-1">Testes Automatizados</div>
+            </div>
+            <div class="stat-card glass rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold gradient-text">5</div>
+                <div class="text-xs text-gray-400 mt-1">Projetos em Produção</div>
+            </div>
+            <div class="stat-card glass rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold gradient-text">6.º</div>
+                <div class="text-xs text-gray-400 mt-1">CodePoint · 50+ startups</div>
+            </div>
+            <div class="stat-card glass rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold gradient-text">3+</div>
+                <div class="text-xs text-gray-400 mt-1">Anos a programar</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════ -->
+<section id="sobre" class="py-24 bg-slate-800 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Sobre Mim</h2>
+            <p class="text-gray-400">Backend Developer · CTO · Empreendedor</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+            <!-- Story -->
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <h3 class="text-xl font-bold mb-4 text-green-400"><i class="fas fa-user mr-2"></i>A Minha História</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Comecei como Técnico em Energia Elétrica, mas foi o amor pela programação que me trouxe até aqui.
+                        Actualmente no <span class="text-green-400 font-semibold">3.º ano de Ciência da Computação</span> no ISMA e a cursar
+                        <span class="text-cyan-400 font-semibold">Mecatrónica</span> no CINFOTEC Huambo em parceria com a Wenzhou VTC da China.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#projetos" class="px-8 py-4 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold text-center transition-all transform hover:-translate-y-1 animate-pulse-glow">
-                            Ver Projetos <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                        <a href="#contato" class="px-8 py-4 bg-slate-800 border border-green-500/30 rounded-lg font-bold text-center hover:bg-slate-700 transition-all">
-                            Falar Comigo
-                        </a>
-                    </div>
-                    <div class="flex items-center space-x-6">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-map-marker-alt text-green-400"></i>
-                            <span class="text-gray-300">Luanda, Angola</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-clock text-green-400"></i>
-                            <span class="text-gray-300">3+ anos Python</span>
-                        </div>
-                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Co-fundei a <span class="text-green-400 font-semibold">Kombinu EdTech</span>, onde actuo como CTO liderando
+                        uma equipa técnica de 2 devs. Somos finalistas do
+                        <span class="text-yellow-400 font-semibold">CodePoint by Mirantes</span> — o maior concurso de startups de Angola —,
+                        tendo alcançado o <span class="text-yellow-400 font-bold">6.º lugar entre mais de 50 equipas</span>.
+                    </p>
                 </div>
-                
-                <!-- Code Terminal -->
-                <div class="code-terminal rounded-xl overflow-hidden shadow-2xl">
-                    <div class="flex items-center px-4 py-3 bg-slate-800 border-b border-green-500/20">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                        </div>
-                        <div class="ml-4 text-sm text-gray-400 font-mono">emicy963.py</div>
-                    </div>
-                    <div class="p-6 font-mono text-sm space-y-2">
-                        <div class="text-gray-500"># Bem-vindo ao meu mundo!</div>
-                        <div><span class="text-purple-400">class</span> <span class="text-cyan-400">Emicy963</span><span class="text-yellow-300">:</span></div>
-                        <div class="ml-4"><span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span><span class="text-yellow-300">(</span><span class="text-orange-400">self</span><span class="text-yellow-300">):</span></div>
-                        <div class="ml-8"><span class="text-orange-400">self</span><span class="text-yellow-300">.</span><span class="text-cyan-400">nome</span> = <span class="text-orange-300">"Anderson Cafurica"</span></div>
-                        <div class="ml-8"><span class="text-orange-400">self</span><span class="text-yellow-300">.</span><span class="text-cyan-400">skills</span> = <span class="text-yellow-300">[</span><span class="text-orange-300">"Python"</span><span class="text-yellow-300">, </span><span class="text-orange-300">"Django"</span><span class="text-yellow-300">, </span><span class="text-orange-300">"AI"</span><span class="text-yellow-300">]</span></div>
-                        <div class="ml-8"><span class="text-orange-400">self</span><span class="text-yellow-300">.</span><span class="text-cyan-400">missao</span> = <span class="text-orange-300">"Transformar ideias em código"</span></div>
-                        <div class="mt-3"><span class="text-cyan-400">dev</span> = <span class="text-cyan-400">Emicy963</span><span class="text-yellow-300">()</span></div>
-                        <div class="text-green-400">> Desenvolvedor inicializado! 🚀</div>
-                        <div class="typing-cursor"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="sobre" class="py-24 bg-slate-800 relative animate-on-scroll">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold mb-4 gradient-text">Sobre Mim</h2>
-                    <p class="text-xl text-gray-300">A jornada de um dev apaixonado por tecnologia</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6">
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-2xl font-bold mb-4 text-green-400">Minha História</h3>
-                            <p class="text-gray-300 leading-relaxed mb-4">
-                                Começei minha jornada na área tech como Técnico em Energia e Instalações Elétricas, mas foi o amor pela programação que me trouxe até aqui. Atualmente no terceiro ano de Ciência da Computação, venho construindo soluções digitais há mais de 3 anos.
-                            </p>
-                            <p class="text-gray-300 leading-relaxed">
-                                Fundei a <span class="text-green-400 font-semibold">PyNerd Angola</span> com o objetivo de democratizar o ensino de programação e oferecer soluções de desenvolvimento de alta qualidade para empresas angolanas e internacionais.
-                            </p>
+                <!-- Education -->
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <h3 class="text-xl font-bold mb-5 text-green-400"><i class="fas fa-graduation-cap mr-2"></i>Formação</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-green-500 pl-4">
+                            <h4 class="font-semibold text-white">Ciência da Computação</h4>
+                            <p class="text-green-400 text-sm">ISMA – Instituto Superior Metropolitano de Angola</p>
+                            <p class="text-gray-400 text-sm">2023 – 2026 · 6 semestres concluídos</p>
                         </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="glass p-4 rounded-lg border border-green-500/20 text-center">
-                                <div class="text-2xl font-bold text-green-400">40+</div>
-                                <div class="text-sm text-gray-300">Projetos Concluídos</div>
-                            </div>
-                            <div class="glass p-4 rounded-lg border border-green-500/20 text-center">
-                                <div class="text-2xl font-bold text-green-400">3+</div>
-                                <div class="text-sm text-gray-300">Anos de Experiência</div>
-                            </div>
+                        <div class="border-l-2 border-cyan-500 pl-4">
+                            <h4 class="font-semibold text-white">Técnico em Mecatrónica</h4>
+                            <p class="text-cyan-400 text-sm">CINFOTEC Huambo / Wenzhou Vocational and Technical College</p>
+                            <p class="text-gray-400 text-sm">2025 – 2028 · Em curso</p>
                         </div>
-                    </div>
-                    
-                    <div class="space-y-6">
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-xl font-bold mb-4 text-green-400">
-                                <i class="fas fa-graduation-cap mr-2"></i>Formação
-                            </h3>
-                            <div class="space-y-3">
-                                <div class="border-l-2 border-green-500 pl-4">
-                                    <h4 class="font-semibold">Ciência da Computação</h4>
-                                    <p class="text-gray-400 text-sm">3º Ano - Em andamento</p>
-                                </div>
-                                <div class="border-l-2 border-green-500 pl-4">
-                                    <h4 class="font-semibold">Técnico em Energia e Instalações Elétricas</h4>
-                                    <p class="text-gray-400 text-sm">Ensino Médio - Concluído</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-xl font-bold mb-4 text-green-400">
-                                <i class="fas fa-building mr-2"></i>PyNerd Angola
-                            </h3>
-                            <div class="space-y-3">
-                                <div class="flex items-center space-x-3">
-                                    <i class="fas fa-chalkboard-teacher text-cyan-400"></i>
-                                    <span><strong>PyNerd Academy:</strong> Ensino de programação</span>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <i class="fas fa-laptop-code text-cyan-400"></i>
-                                    <span><strong>PyNerd Development:</strong> Soluções digitais</span>
-                                </div>
-                            </div>
+                        <div class="border-l-2 border-gray-500 pl-4">
+                            <h4 class="font-semibold text-white">Técnico em Energia e Instalações Elétricas</h4>
+                            <p class="text-gray-400 text-sm">Ensino Médio · Concluído</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="habilidades" class="py-24 bg-slate-900 animate-on-scroll">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Habilidades Técnicas</h2>
-                <p class="text-xl text-gray-300">Tecnologias que domino para criar soluções completas</p>
-            </div>
-            
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Programming Languages -->
-                    <div class="glass p-6 rounded-xl border border-green-500/20">
-                        <div class="flex items-center mb-6">
-                            <i class="fas fa-code text-2xl text-green-400 mr-3"></i>
-                            <h3 class="text-xl font-bold">Linguagens</h3>
+            <!-- Right column -->
+            <div class="space-y-6">
+                <!-- Achievement highlight -->
+                <div class="glass p-6 rounded-xl border border-yellow-500/30" style="background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(15,23,42,.8))">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-yellow-500/20 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-trophy text-yellow-400 text-xl"></i>
                         </div>
-                        <div class="space-y-4">
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-2">
-                                    <span>Python</span>
-                                    <span class="text-green-400">3 anos</span>
-                                </div>
-                                <div class="bg-slate-700 rounded-full h-2">
-                                    <div class="skill-bar" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-2">
-                                    <span>JavaScript</span>
-                                    <span class="text-green-400">1.5 anos</span>
-                                </div>
-                                <div class="bg-slate-700 rounded-full h-2">
-                                    <div class="skill-bar" style="width: 75%;"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-2">
-                                    <span>Java</span>
-                                    <span class="text-green-400">2 anos</span>
-                                </div>
-                                <div class="bg-slate-700 rounded-full h-2">
-                                    <div class="skill-bar" style="width: 80%;"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-2">
-                                    <span>C/C++</span>
-                                    <span class="text-green-400">2 anos</span>
-                                </div>
-                                <div class="bg-slate-700 rounded-full h-2">
-                                    <div class="skill-bar" style="width: 70%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Frameworks -->
-                    <div class="glass p-6 rounded-xl border border-green-500/20">
-                        <div class="flex items-center mb-6">
-                            <i class="fas fa-layer-group text-2xl text-cyan-400 mr-3"></i>
-                            <h3 class="text-xl font-bold">Frameworks</h3>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Django & FastAPI</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Flask & Spring Boot</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Node.js</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>TailwindCSS & Bootstrap</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>NumPy & Pandas</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Matplotlib</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Tools & Databases -->
-                    <div class="glass p-6 rounded-xl border border-green-500/20">
-                        <div class="flex items-center mb-6">
-                            <i class="fas fa-database text-2xl text-purple-400 mr-3"></i>
-                            <h3 class="text-xl font-bold">Ferramentas & DBs</h3>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>MySQL & PostgreSQL</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>SQLite</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Docker</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Git & GitHub</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>VS Code</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Specialization Areas -->
-                <div class="mt-12 grid md:grid-cols-3 gap-6">
-                    <div class="text-center p-6 glass rounded-xl border border-green-500/20">
-                        <i class="fas fa-globe text-4xl text-green-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                        <p class="text-gray-400">Fullstack web applications</p>
-                    </div>
-                    <div class="text-center p-6 glass rounded-xl border border-green-500/20">
-                        <i class="fas fa-robot text-4xl text-cyan-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Automação</h3>
-                        <p class="text-gray-400">Bots e scripts automatizados</p>
-                    </div>
-                    <div class="text-center p-6 glass rounded-xl border border-green-500/20">
-                        <i class="fas fa-chart-line text-4xl text-purple-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Data Science</h3>
-                        <p class="text-gray-400">Análise de dados e ML</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projetos" class="py-24 bg-slate-800 animate-on-scroll">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Projetos em Destaque</h2>
-                <p class="text-xl text-gray-300">Algumas das soluções que desenvolvi</p>
-            </div>
-            
-            <div class="max-w-6xl mx-auto space-y-12">
-                <!-- FinanciAI -->
-                <div class="project-card glass p-8 rounded-xl hover:border-green-500/50 transition-all">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-chart-line text-2xl text-green-400 mr-3"></i>
-                                <h3 class="text-2xl font-bold">FinanciAI</h3>
-                                <span class="ml-4 bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Fullstack</span>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                Plataforma web fullstack de análise e validação de créditos de forma automática e sem burocracias. Sistema inteligente que revoluciona o processo de aprovação de empréstimos.
+                            <h3 class="text-lg font-bold text-yellow-400 mb-1">CodePoint by Mirantes — 6.º Lugar</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Maior concurso de startups e produção de software de Angola, organizado pela <strong>Mirantes Technologies</strong> com júri da INAPEM e Academia do Empreendedor de Luanda. Competimos com a <strong>Kombinu EdTech</strong> contra mais de 50 startups e consagrámo-nos em 6.º lugar.
                             </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">Python</span>
-                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Django</span>
-                                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">TailwindCSS</span>
-                                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                            </div>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Emicy963/FinanciAI" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
-                                    <i class="fab fa-github mr-2"></i>GitHub
-                                </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kombinu / PyNerd -->
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <h3 class="text-xl font-bold mb-4 text-green-400"><i class="fas fa-rocket mr-2"></i>Iniciativas</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-building text-cyan-400 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-white">Kombinu EdTech <span class="text-xs text-gray-400 ml-2">Co-Fundador & CTO</span></div>
+                                <div class="text-sm text-gray-400">Startup de 5 pessoas a digitalizar a educação angolana</div>
                             </div>
                         </div>
-                        <div class="bg-slate-900 rounded-lg p-6 border border-green-500/20">
-                            <div class="font-mono text-sm text-green-400">
-                                <div class="mb-2"># FinanciAI Features</div>
-                                <div class="text-white">✓ Análise automática de crédito</div>
-                                <div class="text-white">✓ Interface intuitiva</div>
-                                <div class="text-white">✓ Validação em tempo real</div>
-                                <div class="text-white">✓ Dashboard completo</div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-chalkboard-teacher text-green-400 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-white">PyNerd Academy <span class="text-xs text-gray-400 ml-2">Fundador</span></div>
+                                <div class="text-sm text-gray-400">Democratizando o ensino de programação em Angola</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-store text-purple-400 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-white">PyNerd Development</div>
+                                <div class="text-sm text-gray-400">Soluções digitais para empresas angolanas e internacionais</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- InfoStore -->
-                <div class="project-card glass p-8 rounded-xl hover:border-green-500/50 transition-all">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="md:order-2">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-store text-2xl text-cyan-400 mr-3"></i>
-                                <h3 class="text-2xl font-bold">InfoStore</h3>
-                                <span class="ml-4 bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">E-commerce</span>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                Projeto profissional PyNerd para empresa de eletrônicos. E-commerce completo em desenvolvimento, com landing page já funcional e backend em FastAPI.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">FastAPI</span>
-                                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">TailwindCSS</span>
-                                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                            </div>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Emicy963/Infostore" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
-                                    <i class="fab fa-github mr-2"></i>GitHub
-                                </a>
-                                <a href="https://infostore-tau.vercel.app/" target="_blank" class="flex items-center text-gray-400 hover:text-cyan-400 transition-colors">
-                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
-                                </a>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 rounded-lg p-6 border border-cyan-500/20">
-                            <div class="font-mono text-sm text-cyan-400">
-                                <div class="mb-2"># InfoStore Features</div>
-                                <div class="text-white">✓ Landing page responsiva</div>
-                                <div class="text-white">✓ Backend FastAPI</div>
-                                <div class="text-white">✓ E-commerce em desenvolvimento</div>
-                                <div class="text-white">✓ Design moderno</div>
-                            </div>
-                        </div>
+
+                <!-- Quick facts -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-4 rounded-lg border border-green-500/20 text-center">
+                        <div class="text-2xl font-bold text-green-400">5+</div>
+                        <div class="text-xs text-gray-400 mt-1">Projetos em produção</div>
+                    </div>
+                    <div class="glass p-4 rounded-lg border border-green-500/20 text-center">
+                        <div class="text-2xl font-bold text-green-400">2</div>
+                        <div class="text-xs text-gray-400 mt-1">Licenciaturas activas</div>
                     </div>
                 </div>
-                
-                <!-- Saude e Bem-Estar -->
-                <div class="project-card glass p-8 rounded-xl hover:border-green-500/50 transition-all">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EXPERIENCE
+═══════════════════════════════════════ -->
+<section id="experiencia" class="py-24 bg-slate-900 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Experiência Profissional</h2>
+            <p class="text-gray-400">Percurso real, com impacto real</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-6">
+
+            <!-- Kombinu CTO -->
+            <div class="exp-card glass p-7 rounded-xl">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-green-500/20 rounded-xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-microchip text-2xl text-green-400"></i>
+                        </div>
                         <div>
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-leaf text-2xl text-green-400 mr-3"></i>
-                                <h3 class="text-2xl font-bold">Saúde e Bem-Estar</h3>
-                                <span class="ml-4 bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Landing Page</span>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                Projeto profissional PyNerd para empresa de limpeza de estofados. Landing page elegante e responsiva que converte visitantes em clientes através de design persuasivo e moderno.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm">HTML</span>
-                                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">TailwindCSS</span>
-                                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                            </div>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Emicy963/Saude-e-Bem-Estar" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
-                                    <i class="fab fa-github mr-2"></i>GitHub
-                                </a>
-                                <a href="https://saude-e-bem-estar-blond.vercel.app/" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
-                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
-                                </a>
-                            </div>
+                            <h3 class="text-xl font-bold text-white">CTO & Co-Fundador</h3>
+                            <a href="https://kombinu-frontend.vercel.app" target="_blank" class="text-green-400 font-semibold hover:text-green-300 transition-colors">Kombinu EdTech Startup</a>
+                            <div class="text-gray-400 text-sm mt-0.5">Startup EdTech · 5 integrantes · Huambo, Angola</div>
                         </div>
-                        <div class="bg-slate-900 rounded-lg p-6 border border-green-500/20">
-                            <div class="font-mono text-sm text-green-400">
-                                <div class="mb-2"># Saúde e Bem-Estar Features</div>
-                                <div class="text-white">✓ Design responsivo</div>
-                                <div class="text-white">✓ CTA otimizada</div>
-                                <div class="text-white">✓ Performance elevada</div>
-                                <div class="text-white">✓ SEO friendly</div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="flex flex-col items-end gap-2 flex-shrink-0">
+                        <span class="text-sm text-gray-400 font-mono">2024 – Presente</span>
+                        <span class="badge-gold text-xs px-3 py-1 rounded-full font-semibold">🏆 6.º CodePoint by Mirantes</span>
                     </div>
                 </div>
-                
-                <!-- PyNerd Bot -->
-                <div class="project-card glass p-8 rounded-xl hover:border-green-500/50 transition-all">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="md:order-2">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-robot text-2xl text-purple-400 mr-3"></i>
-                                <h3 class="text-2xl font-bold">PyNerd Bot</h3>
-                                <span class="ml-4 bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">Bot</span>
-                            </div>
-                            <p class="text-gray-300 mb-6">
-                                Bot inteligente para Telegram que responde e interage com usuários de forma autônoma. Desenvolvido com PyNerd branding, oferece suporte automatizado e experiência interativa.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">Python</span>
-                                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">python-telegram-bot</span>
-                            </div>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Emicy963/pynerd_telegram_bot" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
-                                    <i class="fab fa-github mr-2"></i>GitHub
-                                </a>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 rounded-lg p-6 border border-purple-500/20">
-                            <div class="font-mono text-sm text-purple-400">
-                                <div class="mb-2"># PyNerd Bot Features</div>
-                                <div class="text-white">✓ Respostas automáticas</div>
-                                <div class="text-white">✓ Interação inteligente</div>
-                                <div class="text-white">✓ Suporte 24/7</div>
-                                <div class="text-white">✓ Fácil configuração</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-300">
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-green-400 mt-1 text-xs flex-shrink-0"></i><span>Lidero equipa técnica de 2 devs (frontend + backend) como CTO, definindo arquitectura e stack tecnológica</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-green-400 mt-1 text-xs flex-shrink-0"></i><span>Desenvolvi o MVP completo — quizzes interativos, rankings globais, gamificação, 36 testes automatizados</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-green-400 mt-1 text-xs flex-shrink-0"></i><span>Implementei CI/CD com GitHub Actions, Docker, autenticação JWT e documentação OpenAPI/Swagger</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-green-400 mt-1 text-xs flex-shrink-0"></i><span>Alcancei 6.º lugar no CodePoint by Mirantes entre 50+ startups competidoras</span></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-5">
+                    <span class="bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded text-xs">Python</span>
+                    <span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded text-xs">Django</span>
+                    <span class="bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded text-xs">DRF</span>
+                    <span class="bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded text-xs">Docker</span>
+                    <span class="bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded text-xs">GitHub Actions</span>
+                    <span class="bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded text-xs">Pytest</span>
+                    <span class="bg-slate-600/50 text-gray-300 px-2.5 py-1 rounded text-xs">Liderança Técnica</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="servicos" class="py-24 bg-slate-900 animate-on-scroll">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Serviços & Soluções</h2>
-                <p class="text-xl text-gray-300">Transformo suas ideias em soluções digitais de alta qualidade</p>
-            </div>
-            
-            <div class="max-w-6xl mx-auto">
-                <!-- PyNerd Segments -->
-                <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="glass p-8 rounded-xl border border-green-500/20 text-center">
-                        <div class="bg-green-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-chalkboard-teacher text-2xl text-green-400"></i>
+            <!-- Transcendental -->
+            <div class="exp-card glass p-7 rounded-xl">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-cyan-500/20 rounded-xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-paint-brush text-2xl text-cyan-400"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-green-400">PyNerd Academy</h3>
-                        <p class="text-gray-300 mb-6">Democratizando o ensino de programação em Angola através de cursos práticos e mentoria personalizada.</p>
-                        <div class="space-y-2 text-sm text-gray-400">
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Aulas particulares de Python</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Mentoria em desenvolvimento web</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-green-400"></i>
-                                <span>Workshops e treinamentos</span>
-                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Web Designer</h3>
+                            <div class="text-cyan-400 font-semibold">Transcendental</div>
+                            <div class="text-gray-400 text-sm mt-0.5">Agência de Marketing Digital · Angola · Estágio</div>
                         </div>
                     </div>
-                    
-                    <div class="glass p-8 rounded-xl border border-cyan-500/20 text-center">
-                        <div class="bg-cyan-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-laptop-code text-2xl text-cyan-400"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-cyan-400">PyNerd Development</h3>
-                        <p class="text-gray-300 mb-6">Desenvolvimento de soluções digitais completas para empresas angolanas e internacionais.</p>
-                        <div class="space-y-2 text-sm text-gray-400">
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-cyan-400"></i>
-                                <span>Aplicações web fullstack</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-cyan-400"></i>
-                                <span>E-commerce e landing pages</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check text-cyan-400"></i>
-                                <span>Automação e bots</span>
-                            </div>
-                        </div>
+                    <div class="flex flex-col items-end gap-2 flex-shrink-0">
+                        <span class="text-sm text-gray-400 font-mono">3 meses</span>
+                        <span class="bg-slate-700 text-gray-300 text-xs px-3 py-1 rounded-full">Híbrido · Presencial</span>
                     </div>
                 </div>
-                
-                <!-- Main Services -->
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="glass p-6 rounded-xl border border-green-500/20">
-                        <i class="fas fa-code text-3xl text-green-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-3">Desenvolvimento Web</h3>
-                        <p class="text-gray-300 mb-4">Criação de sites, sistemas web e aplicações fullstack usando as melhores tecnologias.</p>
-                        <ul class="space-y-2 text-sm text-gray-400">
-                            <li>• Landing Pages responsivas</li>
-                            <li>• E-commerce completo</li>
-                            <li>• Sistemas de gestão</li>
-                            <li>• APIs e backends</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="glass p-6 rounded-xl border border-purple-500/20">
-                        <i class="fas fa-robot text-3xl text-purple-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-3">Automação</h3>
-                        <p class="text-gray-300 mb-4">Desenvolvimento de bots e scripts para automatizar processos repetitivos.</p>
-                        <ul class="space-y-2 text-sm text-gray-400">
-                            <li>• Bots para Telegram/WhatsApp</li>
-                            <li>• Scripts de automação</li>
-                            <li>• Web scraping</li>
-                            <li>• Processamento de dados</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="glass p-6 rounded-xl border border-orange-500/20">
-                        <i class="fas fa-graduation-cap text-3xl text-orange-400 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-3">Consultoria & Ensino</h3>
-                        <p class="text-gray-300 mb-4">Aulas particulares, consultoria técnica e orientação para projetos de programação.</p>
-                        <ul class="space-y-2 text-sm text-gray-400">
-                            <li>• Aulas particulares</li>
-                            <li>• Consultoria técnica</li>
-                            <li>• Code review</li>
-                            <li>• Mentoria de carreira</li>
-                        </ul>
-                    </div>
+                <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-300">
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-cyan-400 mt-1 text-xs flex-shrink-0"></i><span>Desenvolvi e mantive websites de clientes usando WordPress, Elementor, HTML, CSS e JavaScript</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-cyan-400 mt-1 text-xs flex-shrink-0"></i><span>Integrei APIs externas e geri bases de dados para garantir funcionalidade e performance</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-cyan-400 mt-1 text-xs flex-shrink-0"></i><span>Participei no ciclo completo de entrega de projetos — briefing, desenvolvimento e lançamento</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right text-cyan-400 mt-1 text-xs flex-shrink-0"></i><span>Desenvolvi competências de comunicação profissional, gestão de tarefas e trabalho em equipa</span></div>
                 </div>
-                
-                <!-- CTA Section -->
-                <div class="mt-16 text-center">
-                    <div class="glass p-8 rounded-xl border border-green-500/20">
-                        <h3 class="text-2xl font-bold mb-4">Pronto para dar vida ao seu projeto?</h3>
-                        <p class="text-gray-300 mb-8">Entre em contato para montarmos um orçamento personalizado para suas necessidades</p>
-                        <a href="#contato" class="px-8 py-4 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold transition-all transform hover:-translate-y-1 inline-block">
-                            Solicitar Orçamento <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
+                <div class="flex flex-wrap gap-2 mt-5">
+                    <span class="bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded text-xs">WordPress</span>
+                    <span class="bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded text-xs">Elementor</span>
+                    <span class="bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded text-xs">HTML/CSS</span>
+                    <span class="bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded text-xs">JavaScript</span>
+                    <span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded text-xs">APIs</span>
+                    <span class="bg-slate-600/50 text-gray-300 px-2.5 py-1 rounded text-xs">Bases de Dados</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contato" class="py-24 bg-slate-800 animate-on-scroll">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Vamos Conversar?</h2>
-                <p class="text-xl text-gray-300">Estou sempre aberto a novos projetos e parcerias interessantes</p>
-            </div>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <!-- Contact Info -->
-                    <div class="space-y-8">
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-xl font-bold mb-6 text-green-400">Informações de Contato</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-green-500/20 p-3 rounded-full">
-                                        <i class="fas fa-envelope text-green-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold">Email</div>
-                                        <a href="mailto:emicy963@duck.com" class="text-gray-300 hover:text-green-400 transition-colors">emicy963@duck.com</a>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-green-500/20 p-3 rounded-full">
-                                        <i class="fab fa-whatsapp text-green-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold">WhatsApp</div>
-                                        <a href="https://wa.me/244928301450" target="_blank" class="text-gray-300 hover:text-green-400 transition-colors">+244 928 301 450</a>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-green-500/20 p-3 rounded-full">
-                                        <i class="fas fa-map-marker-alt text-green-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold">Localização</div>
-                                        <span class="text-gray-300">Luanda, Angola</span>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- LovePage SaaS -->
+            <div class="exp-card glass p-7 rounded-xl" style="border-left-color: #ec4899;">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
+                    <div class="flex items-start space-x-4">
+                        <div class="rounded-xl w-14 h-14 flex items-center justify-center flex-shrink-0" style="background: rgba(236,72,153,.15);">
+                            <i class="fas fa-heart text-2xl" style="color:#ec4899;"></i>
                         </div>
-                        
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-xl font-bold mb-6 text-green-400">Redes Sociais</h3>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Emicy963" target="_blank" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-full transition-colors">
-                                    <i class="fab fa-github text-xl"></i>
-                                </a>
-                                <a href="https://linkedin.com/in/anderson-cafurica" target="_blank" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-full transition-colors">
-                                    <i class="fab fa-linkedin text-xl"></i>
-                                </a>
-                                <a href="https://wa.me/244928301450" target="_blank" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-full transition-colors">
-                                    <i class="fab fa-whatsapp text-xl"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="glass p-6 rounded-xl border border-green-500/20">
-                            <h3 class="text-xl font-bold mb-4 text-green-400">Status de Disponibilidade</h3>
-                            <div class="flex items-center space-x-3 mb-3">
-                                <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                                <span class="text-green-400 font-semibold">Disponível para novos projetos</span>
-                            </div>
-                            <p class="text-gray-300 text-sm">Atualmente aceitando projetos freelance e parcerias de longo prazo.</p>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Fundador & Developer</h3>
+                            <a href="https://lovepage-omega.vercel.app" target="_blank" class="font-semibold hover:opacity-80 transition-opacity" style="color:#ec4899;">LovePage Angola – Micro-SaaS</a>
+                            <div class="text-gray-400 text-sm mt-0.5">Produto independente · Dia dos Namorados 2025</div>
                         </div>
                     </div>
-                    
-                    <!-- Contact Form -->
-                    <div class="glass p-8 rounded-xl border border-green-500/20">
-                        <h3 class="text-xl font-bold mb-6 text-green-400">Envie uma Mensagem</h3>
-                        <form class="space-y-6" action="mailto:emicy963@duck.com" method="post" enctype="text/plain">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Nome</label>
-                                <input type="text" name="nome" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors" placeholder="Seu nome completo">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" name="email" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors" placeholder="seu@email.com">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Assunto</label>
-                                <select name="assunto" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors">
-                                    <option value="">Selecione um assunto</option>
-                                    <option value="projeto">Novo Projeto</option>
-                                    <option value="consultoria">Consultoria</option>
-                                    <option value="aulas">Aulas Particulares</option>
-                                    <option value="parceria">Parceria</option>
-                                    <option value="outro">Outro</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Mensagem</label>
-                                <textarea name="mensagem" rows="5" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors" placeholder="Conte-me sobre seu projeto ou como posso ajudar..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold hover:from-green-600 hover:to-cyan-600 transition-all transform hover:-translate-y-0.5">
-                                Enviar Mensagem <i class="fas fa-paper-plane ml-2"></i>
-                            </button>
-                        </form>
-                        
-                        <div class="mt-6 text-center text-sm text-gray-400">
-                            <p>Ou entre em contato diretamente pelo WhatsApp para uma resposta mais rápida!</p>
-                        </div>
+                    <div class="flex flex-col items-end gap-2 flex-shrink-0">
+                        <span class="text-sm text-gray-400 font-mono">Fev. 2025</span>
+                        <span class="text-xs px-3 py-1 rounded-full font-semibold" style="background:rgba(236,72,153,.2);color:#ec4899;">5+ clientes pagantes</span>
                     </div>
                 </div>
+                <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-300">
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right mt-1 text-xs flex-shrink-0" style="color:#ec4899;"></i><span>Concebi, desenvolvi e comercializei independentemente um micro-SaaS de presenteio digital</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right mt-1 text-xs flex-shrink-0" style="color:#ec4899;"></i><span>3 planos pagos (5k / 12k / 25k AOA), 7 templates, pagamento via Multicaixa Express</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right mt-1 text-xs flex-shrink-0" style="color:#ec4899;"></i><span>Geri o ciclo completo: produto, marketing, atendimento ao cliente e entrega</span></div>
+                    <div class="flex items-start space-x-2"><i class="fas fa-chevron-right mt-1 text-xs flex-shrink-0" style="color:#ec4899;"></i><span>Vendeu 5+ páginas personalizadas com SLAs de entrega definidos por plano</span></div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-green-500/20 py-12">
-        <div class="container mx-auto px-4">
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════ -->
+<section id="habilidades" class="py-24 bg-slate-800 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Habilidades Técnicas</h2>
+            <p class="text-gray-400">Stack sólido — construído com projectos reais em produção</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full flex items-center justify-center">
-                            <span class="font-mono font-bold text-slate-900">E</span>
+                <!-- Languages -->
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-code text-2xl text-green-400 mr-3"></i>
+                        <h3 class="text-xl font-bold">Linguagens</h3>
+                    </div>
+                    <div class="space-y-4" id="skills-langs">
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-sm"><span>Python</span><span class="text-green-400">3+ anos</span></div>
+                            <div class="bg-slate-700 rounded-full h-1.5"><div class="skill-bar" style="width:92%"></div></div>
                         </div>
                         <div>
-                            <span class="font-mono font-bold text-lg gradient-text">Emicy963</span>
-                            <div class="text-xs text-gray-400">PyNerd Angola</div>
+                            <div class="flex justify-between mb-1.5 text-sm"><span>SQL</span><span class="text-green-400">2 anos</span></div>
+                            <div class="bg-slate-700 rounded-full h-1.5"><div class="skill-bar" style="width:80%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-sm"><span>JavaScript</span><span class="text-green-400">1.5 anos</span></div>
+                            <div class="bg-slate-700 rounded-full h-1.5"><div class="skill-bar" style="width:70%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-sm"><span>Java</span><span class="text-green-400">2 anos</span></div>
+                            <div class="bg-slate-700 rounded-full h-1.5"><div class="skill-bar" style="width:65%"></div></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 text-sm">
-                        Transformando ideias em soluções digitais inovadoras. Desenvolvedor Python/Fullstack apaixonado por tecnologia.
-                    </p>
                 </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4 text-green-400">Serviços</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-green-400 transition-colors">Desenvolvimento Web</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition-colors">Automação</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition-colors">Aulas Particulares</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition-colors">Consultoria</a></li>
+
+                <!-- Backend -->
+                <div class="glass p-6 rounded-xl border border-cyan-500/20">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-server text-2xl text-cyan-400 mr-3"></i>
+                        <h3 class="text-xl font-bold">Backend & APIs</h3>
+                    </div>
+                    <div class="space-y-2.5 text-sm">
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>Django & DRF</span></div>
+                            <span class="text-xs text-cyan-400 font-mono">core</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>FastAPI & Flask</span></div>
+                            <span class="text-xs text-cyan-400 font-mono">proficiente</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>JWT Authentication</span></div>
+                            <span class="text-xs text-cyan-400 font-mono">avançado</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>OpenAPI / Swagger</span></div>
+                            <span class="text-xs text-cyan-400 font-mono">avançado</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>REST API Design</span></div>
+                            <span class="text-xs text-cyan-400 font-mono">avançado</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>Pytest / pytest-cov</span></div>
+                            <span class="text-xs text-green-400 font-mono">102+ testes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps & DBs -->
+                <div class="glass p-6 rounded-xl border border-purple-500/20">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-cloud text-2xl text-purple-400 mr-3"></i>
+                        <h3 class="text-xl font-bold">DevOps & Bases de Dados</h3>
+                    </div>
+                    <div class="space-y-2.5 text-sm">
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>Docker & Docker Compose</span></div>
+                            <span class="text-xs text-purple-400 font-mono">produção</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>GitHub Actions (CI/CD)</span></div>
+                            <span class="text-xs text-purple-400 font-mono">produção</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>PostgreSQL & MySQL</span></div>
+                            <span class="text-xs text-purple-400 font-mono">avançado</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>MongoDB</span></div>
+                            <span class="text-xs text-purple-400 font-mono">proficiente</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>Render & Vercel</span></div>
+                            <span class="text-xs text-purple-400 font-mono">deploy</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg">
+                            <div class="flex items-center space-x-2"><i class="fas fa-check-circle text-green-400 text-xs"></i><span>Git & GitHub</span></div>
+                            <span class="text-xs text-purple-400 font-mono">avançado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ML row -->
+            <div class="mt-8 glass p-6 rounded-xl border border-green-500/20">
+                <div class="flex items-center mb-5">
+                    <i class="fas fa-brain text-2xl text-green-400 mr-3"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">Machine Learning & Data <span class="text-sm font-normal text-gray-400 ml-2">(em desenvolvimento activo)</span></h3>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-orange-500/20 text-orange-400 px-4 py-1.5 rounded-full text-sm">Scikit-learn</span>
+                    <span class="bg-blue-500/20 text-blue-400 px-4 py-1.5 rounded-full text-sm">Pandas</span>
+                    <span class="bg-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-sm">NumPy</span>
+                    <span class="bg-yellow-500/20 text-yellow-400 px-4 py-1.5 rounded-full text-sm">Matplotlib</span>
+                    <span class="bg-purple-500/20 text-purple-400 px-4 py-1.5 rounded-full text-sm">Seaborn</span>
+                    <span class="bg-cyan-500/20 text-cyan-400 px-4 py-1.5 rounded-full text-sm">Google Colab</span>
+                    <span class="bg-red-500/20 text-red-400 px-4 py-1.5 rounded-full text-sm">Kaggle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROJECTS
+═══════════════════════════════════════ -->
+<section id="projetos" class="py-24 bg-slate-900 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Projetos em Destaque</h2>
+            <p class="text-gray-400">Todos em produção · Código real · Impacto real</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto space-y-8">
+
+            <!-- PyNerd Academy -->
+            <div class="project-card glass p-8 rounded-xl">
+                <div class="grid md:grid-cols-5 gap-8 items-center">
+                    <div class="md:col-span-3">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <i class="fas fa-graduation-cap text-2xl text-green-400"></i>
+                            <h3 class="text-2xl font-bold">PyNerd Academy</h3>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">EdTech · CEO/CTO</span>
+                            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs">Em Produção</span>
+                        </div>
+                        <p class="text-gray-300 mb-5 leading-relaxed">
+                            Plataforma de ensino técnico de alta qualidade direcionada ao mercado angolano e PALOP. Desenvolvida como CEO/CTO com uma equipa multidisciplinar. Inclui gestão de cursos, módulos, aulas em vídeo e acompanhamento de progresso do estudante.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded text-xs">Python</span>
+                            <span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded text-xs">Django</span>
+                            <span class="bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded text-xs">DRF</span>
+                            <span class="bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded text-xs">Docker</span>
+                            <span class="bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded text-xs">GitHub Actions CI/CD</span>
+                            <span class="bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded text-xs">JWT</span>
+                            <span class="bg-slate-600/50 text-gray-300 px-2.5 py-1 rounded text-xs">Pytest</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://github.com/Emicy963/PyNerd-Academy-Backend" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-green-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Backend
+                            </a>
+                            <a href="https://github.com/Emicy963/PyNerd" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-green-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Frontend
+                            </a>
+                            <a href="https://py-nerd.vercel.app/" target="_blank" class="flex items-center text-sm text-green-400 hover:text-green-300 transition-colors font-semibold">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 code-terminal rounded-lg p-5 font-mono text-xs space-y-1.5">
+                        <div class="text-gray-500"># PyNerd Academy</div>
+                        <div class="text-green-400">✓ <span class="text-white">CI/CD com GitHub Actions</span></div>
+                        <div class="text-green-400">✓ <span class="text-white">Docker & Docker Compose</span></div>
+                        <div class="text-green-400">✓ <span class="text-white">JWT role-based auth</span></div>
+                        <div class="text-green-400">✓ <span class="text-white">OpenAPI/Swagger docs</span></div>
+                        <div class="text-green-400">✓ <span class="text-white">11 versioned releases</span></div>
+                        <div class="text-green-400">✓ <span class="text-white">Equipa multidisciplinar</span></div>
+                        <div class="mt-2 text-cyan-400">$ <span class="text-gray-300">curl py-nerd.vercel.app</span></div>
+                        <div class="text-green-300">→ 200 OK 🚀</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- InfoStore -->
+            <div class="project-card glass p-8 rounded-xl">
+                <div class="grid md:grid-cols-5 gap-8 items-center">
+                    <div class="md:col-span-2 md:order-2 code-terminal rounded-lg p-5 font-mono text-xs space-y-1.5">
+                        <div class="text-gray-500"># InfoStore API Tests</div>
+                        <div class="text-cyan-400">pytest apps/ <span class="text-gray-400">--cov</span></div>
+                        <div class="text-gray-400">───────────────────</div>
+                        <div class="text-white">accounts  <span class="text-green-400">21 passed</span></div>
+                        <div class="text-white">products  <span class="text-green-400">17 passed</span></div>
+                        <div class="text-white">cart      <span class="text-green-400">20 passed</span></div>
+                        <div class="text-white">orders    <span class="text-green-400">14 passed</span></div>
+                        <div class="text-white">reviews   <span class="text-green-400">15 passed</span></div>
+                        <div class="text-white">wishlist  <span class="text-green-400">15 passed</span></div>
+                        <div class="text-gray-400">───────────────────</div>
+                        <div class="text-green-400 font-bold">TOTAL: 102 passed ✓</div>
+                    </div>
+                    <div class="md:col-span-3 md:order-1">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <i class="fas fa-store text-2xl text-cyan-400"></i>
+                            <h3 class="text-2xl font-bold">InfoStore E-commerce</h3>
+                            <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold">API REST · 102 Testes</span>
+                        </div>
+                        <p class="text-gray-300 mb-5 leading-relaxed">
+                            API REST completa para e-commerce com sistema de carrinho anónimo/autenticado, wishlist, avaliações com rating automático via Django Signals, e múltiplos métodos de pagamento angolanos (Multicaixa Express, Transferência, Entrega). Suite de 102 testes automatizados com cobertura total.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded text-xs">Django</span>
+                            <span class="bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded text-xs">DRF</span>
+                            <span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded text-xs">JWT</span>
+                            <span class="bg-red-500/20 text-red-400 px-2.5 py-1 rounded text-xs">django-axes</span>
+                            <span class="bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded text-xs">PostgreSQL</span>
+                            <span class="bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded text-xs">Pytest</span>
+                            <span class="bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded text-xs">Render</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://github.com/Emicy963/InfoStore-API" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Backend
+                            </a>
+                            <a href="https://github.com/Emicy963/Infostore" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Frontend
+                            </a>
+                            <a href="https://infostore-tau.vercel.app/" target="_blank" class="flex items-center text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-semibold">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kombinu -->
+            <div class="project-card glass p-8 rounded-xl" style="border-color: rgba(251,191,36,.25);">
+                <div class="grid md:grid-cols-5 gap-8 items-center">
+                    <div class="md:col-span-3">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <i class="fas fa-book-open text-2xl text-yellow-400"></i>
+                            <h3 class="text-2xl font-bold">Kombinu</h3>
+                            <span class="badge-gold px-3 py-1 rounded-full text-xs font-bold">🏆 6.º CodePoint · 50+ startups</span>
+                        </div>
+                        <p class="text-gray-300 mb-5 leading-relaxed">
+                            MVP da Kombinu EdTech Startup. Plataforma educacional com quizzes interativos, correção automática, rankings globais e gamificação. Dois roles de utilizador (Creator e Learner) com permissões distintas. 36 testes automatizados, CHANGELOG versionado (v2.0) e deploy em produção.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded text-xs">Python</span>
+                            <span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded text-xs">Django</span>
+                            <span class="bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded text-xs">DRF</span>
+                            <span class="bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded text-xs">JWT</span>
+                            <span class="bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded text-xs">Swagger/ReDoc</span>
+                            <span class="bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded text-xs">Pytest · 36 testes</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://github.com/Emicy963/Kombinu" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-yellow-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Backend
+                            </a>
+                            <a href="https://github.com/Emicy963/Kombinu-Frontend" target="_blank" class="flex items-center text-sm text-gray-400 hover:text-yellow-400 transition-colors">
+                                <i class="fab fa-github mr-2"></i>Frontend
+                            </a>
+                            <a href="https://kombinu-frontend.vercel.app/" target="_blank" class="flex items-center text-sm text-yellow-400 hover:text-yellow-300 transition-colors font-semibold">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 code-terminal rounded-lg p-5 font-mono text-xs space-y-1.5" style="border-color: rgba(251,191,36,.3);">
+                        <div class="text-gray-500"># Kombinu EdTech MVP</div>
+                        <div class="text-yellow-400">✓ <span class="text-white">Quizzes + auto-grading</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">Global leaderboards</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">Gamificação</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">Creator / Learner roles</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">Swagger + ReDoc</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">36 automated tests</span></div>
+                        <div class="text-yellow-400">✓ <span class="text-white">141 commits · v2.0</span></div>
+                        <div class="mt-2 text-yellow-300">🏆 <span class="text-white">6.º CodePoint Angola</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-commerce + LovePage row -->
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Ecommerce -->
+                <div class="project-card glass p-6 rounded-xl h-full flex flex-col">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-shopping-cart text-xl text-green-400"></i>
+                        <h3 class="text-xl font-bold">E-commerce Multi-Vendor</h3>
+                        <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs">Marketplace</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed flex-grow">
+                        Marketplace multi-vendedor para o mercado angolano com pagamento em Kwanza (AOA) via Multicaixa, gestão de stock automático, aprovação de vendedores e funcionalidades completas para compradores e sellers. 209 commits, documentação técnica detalhada.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-xs">Django</span>
+                        <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs">DRF</span>
+                        <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs">JWT</span>
+                        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs">PostgreSQL</span>
+                        <span class="bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded text-xs">Swagger</span>
+                    </div>
+                    <div class="flex gap-4 text-sm">
+                        <a href="https://github.com/Emicy963/ecommerce-backend" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-github mr-1.5"></i>Backend
+                        </a>
+                        <a href="https://github.com/Emicy963/ecommerce-frontend" target="_blank" class="flex items-center text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-github mr-1.5"></i>Frontend
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LovePage -->
+                <div class="project-card glass p-6 rounded-xl h-full flex flex-col" style="border-color: rgba(236,72,153,.25);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-heart text-xl" style="color:#ec4899;"></i>
+                        <h3 class="text-xl font-bold">LovePage Angola</h3>
+                        <span class="text-xs px-2 py-0.5 rounded font-semibold" style="background:rgba(236,72,153,.2);color:#ec4899;">Micro-SaaS · 5+ clientes</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed flex-grow">
+                        Micro-SaaS de presenteio digital desenvolvido e comercializado independentemente para o Dia dos Namorados. 3 planos pagos (5k–25k AOA), 7 templates personalizáveis, quiz interativo, integração Spotify, QR Code físico. Pagamento via Multicaixa Express. 5+ páginas vendidas.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs">JavaScript</span>
+                        <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs">HTML/CSS</span>
+                        <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs">Vercel</span>
+                        <span class="bg-slate-600/50 text-gray-300 px-2 py-0.5 rounded text-xs">Multicaixa</span>
+                    </div>
+                    <div class="flex gap-4 text-sm">
+                        <a href="https://github.com/Emicy963/lovepage" target="_blank" class="flex items-center text-gray-400 hover:text-pink-400 transition-colors">
+                            <i class="fab fa-github mr-1.5"></i>GitHub
+                        </a>
+                        <a href="https://lovepage-omega.vercel.app/" target="_blank" class="flex items-center font-semibold hover:opacity-80 transition-opacity" style="color:#ec4899;">
+                            <i class="fas fa-external-link-alt mr-1.5"></i>Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════ -->
+<section id="servicos" class="py-24 bg-slate-800 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Serviços & Soluções</h2>
+            <p class="text-gray-400">Transformo as tuas ideias em produtos digitais de alta qualidade</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="glass p-7 rounded-xl border border-green-500/20 text-center">
+                    <div class="bg-green-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-chalkboard-teacher text-2xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-green-400">PyNerd Academy</h3>
+                    <p class="text-gray-300 text-sm mb-5 leading-relaxed">Democratizando o ensino de programação em Angola com aulas práticas e mentoria personalizada.</p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-green-400"></i><span>Aulas particulares de Python</span></div>
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-green-400"></i><span>Mentoria em desenvolvimento web</span></div>
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-green-400"></i><span>Code review & boas práticas</span></div>
+                    </div>
+                </div>
+
+                <div class="glass p-7 rounded-xl border border-cyan-500/20 text-center">
+                    <div class="bg-cyan-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-laptop-code text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400">PyNerd Development</h3>
+                    <p class="text-gray-300 text-sm mb-5 leading-relaxed">Desenvolvimento de APIs REST, plataformas web e soluções digitais completas para empresas.</p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-cyan-400"></i><span>APIs REST com Django / FastAPI</span></div>
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-cyan-400"></i><span>E-commerce e marketplaces</span></div>
+                        <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-cyan-400"></i><span>Plataformas web fullstack</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <i class="fas fa-code text-3xl text-green-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Backend & APIs</h3>
+                    <p class="text-gray-300 text-sm mb-4">APIs REST robustas com autenticação JWT, documentação Swagger e testes automatizados.</p>
+                    <ul class="space-y-1.5 text-sm text-gray-400">
+                        <li>• APIs REST com Django/FastAPI</li>
+                        <li>• Autenticação e autorização</li>
+                        <li>• Integração com bases de dados</li>
+                        <li>• Deploy em Render/AWS</li>
                     </ul>
                 </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4 text-green-400">Contato</h4>
-                    <div class="space-y-2 text-sm text-gray-400">
-                        <div>emicy963@duck.com</div>
-                        <div>+244 928 301 450</div>
-                        <div>Luanda, Angola</div>
+                <div class="glass p-6 rounded-xl border border-purple-500/20">
+                    <i class="fas fa-robot text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Automação</h3>
+                    <p class="text-gray-300 text-sm mb-4">Scripts e bots para automatizar processos repetitivos e aumentar a produtividade.</p>
+                    <ul class="space-y-1.5 text-sm text-gray-400">
+                        <li>• Bots para Telegram/WhatsApp</li>
+                        <li>• Scripts de automação Python</li>
+                        <li>• Web scraping ético</li>
+                        <li>• Processamento de dados</li>
+                    </ul>
+                </div>
+                <div class="glass p-6 rounded-xl border border-orange-500/20">
+                    <i class="fas fa-graduation-cap text-3xl text-orange-400 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Consultoria & Ensino</h3>
+                    <p class="text-gray-300 text-sm mb-4">Aulas, mentoria e consultoria técnica para projectos de programação.</p>
+                    <ul class="space-y-1.5 text-sm text-gray-400">
+                        <li>• Aulas particulares</li>
+                        <li>• Consultoria técnica</li>
+                        <li>• Code review profissional</li>
+                        <li>• Mentoria de carreira tech</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 glass p-8 rounded-xl border border-green-500/20 text-center">
+                <h3 class="text-2xl font-bold mb-3">Pronto para dar vida ao teu projecto?</h3>
+                <p class="text-gray-300 mb-6 text-sm">Respondo em menos de 24h · Orçamento personalizado e sem compromisso</p>
+                <a href="#contato" class="px-8 py-3.5 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold transition-all transform hover:-translate-y-1 inline-block text-sm">
+                    Solicitar Orçamento <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════ -->
+<section id="contato" class="py-24 bg-slate-900 animate-on-scroll">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold mb-3 gradient-text">Vamos Conversar?</h2>
+            <p class="text-gray-400">Aberto a freelance, emprego remoto e parcerias</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
+            <!-- Info -->
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <h3 class="text-lg font-bold mb-5 text-green-400">Informações de Contacto</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-500/20 p-3 rounded-full flex-shrink-0"><i class="fas fa-envelope text-green-400"></i></div>
+                            <div><div class="text-sm text-gray-400">Email</div><a href="mailto:andersonpaulo931@gmail.com" class="text-white hover:text-green-400 transition-colors">andersonpaulo931@gmail.com</a></div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-500/20 p-3 rounded-full flex-shrink-0"><i class="fab fa-whatsapp text-green-400"></i></div>
+                            <div><div class="text-sm text-gray-400">WhatsApp</div><a href="https://wa.me/244928301450" target="_blank" class="text-white hover:text-green-400 transition-colors">+244 928 301 450</a></div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-500/20 p-3 rounded-full flex-shrink-0"><i class="fas fa-map-marker-alt text-green-400"></i></div>
+                            <div><div class="text-sm text-gray-400">Localização</div><span class="text-white">Huambo, Angola 🇦🇴</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-xl border border-green-500/20">
+                    <h3 class="text-lg font-bold mb-4 text-green-400">Redes & Perfis</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://github.com/Emicy963" target="_blank" class="flex items-center space-x-2 bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition-colors text-sm">
+                            <i class="fab fa-github text-lg"></i><span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/anderson-cafurica-" target="_blank" class="flex items-center space-x-2 bg-slate-700 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors text-sm">
+                            <i class="fab fa-linkedin text-lg text-blue-400"></i><span>LinkedIn</span>
+                        </a>
+                        <a href="https://wa.me/244928301450" target="_blank" class="flex items-center space-x-2 bg-slate-700 hover:bg-green-800 px-4 py-2 rounded-lg transition-colors text-sm">
+                            <i class="fab fa-whatsapp text-lg text-green-400"></i><span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass p-5 rounded-xl border border-green-500/20 flex items-center space-x-4">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+                    <div>
+                        <div class="text-green-400 font-semibold text-sm">Disponível para novos projectos</div>
+                        <p class="text-gray-400 text-xs mt-0.5">Freelance, emprego remoto e parcerias. Resposta em &lt;24h.</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="border-t border-green-500/20 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Emicy963 | PyNerd Angola. Todos os direitos reservados.</p>
-                <p class="mt-2">Feito com <i class="fas fa-heart text-red-500"></i> e muito <i class="fas fa-coffee text-yellow-500"></i></p>
+
+            <!-- Form -->
+            <div class="glass p-7 rounded-xl border border-green-500/20">
+                <h3 class="text-lg font-bold mb-5 text-green-400">Enviar Mensagem</h3>
+                <form class="space-y-4" action="mailto:andersonpaulo931@gmail.com" method="post" enctype="text/plain">
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5 text-gray-300">Nome</label>
+                        <input type="text" name="nome" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-sm" placeholder="O teu nome completo">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5 text-gray-300">Email</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-sm" placeholder="teu@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5 text-gray-300">Assunto</label>
+                        <select name="assunto" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-sm">
+                            <option value="">Selecciona um assunto</option>
+                            <option value="emprego">Oportunidade de Emprego/Freelance</option>
+                            <option value="projeto">Novo Projecto</option>
+                            <option value="consultoria">Consultoria Técnica</option>
+                            <option value="aulas">Aulas / Mentoria</option>
+                            <option value="parceria">Parceria</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5 text-gray-300">Mensagem</label>
+                        <textarea name="mensagem" rows="4" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-sm" placeholder="Conta-me sobre o teu projecto ou como posso ajudar..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-cyan-500 rounded-lg font-bold hover:from-green-600 hover:to-cyan-600 transition-all transform hover:-translate-y-0.5 text-sm">
+                        Enviar Mensagem <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+                <p class="mt-4 text-center text-xs text-gray-500">Ou contacta directamente pelo WhatsApp para resposta mais rápida!</p>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="bg-slate-900 border-t border-green-500/20 py-10">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full flex items-center justify-center">
+                        <span class="font-mono font-bold text-slate-900 text-xs">AC</span>
+                    </div>
+                    <div>
+                        <span class="font-mono font-bold gradient-text">Emicy963</span>
+                        <div class="text-xs text-gray-400">PyNerd Angola · CTO Kombinu</div>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm">Backend Developer & CTO apaixonado por tecnologia, construindo soluções reais para Angola e o mundo.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 text-green-400 text-sm">Serviços</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#servicos" class="hover:text-green-400 transition-colors">APIs REST & Backend</a></li>
+                    <li><a href="#servicos" class="hover:text-green-400 transition-colors">Plataformas Web</a></li>
+                    <li><a href="#servicos" class="hover:text-green-400 transition-colors">Aulas & Mentoria</a></li>
+                    <li><a href="#servicos" class="hover:text-green-400 transition-colors">Consultoria Técnica</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 text-green-400 text-sm">Contacto</h4>
+                <div class="space-y-2 text-sm text-gray-400">
+                    <div>andersonpaulo931@gmail.com</div>
+                    <div>+244 928 301 450</div>
+                    <div>Huambo, Angola</div>
+                    <a href="https://linkedin.com/in/anderson-cafurica-" target="_blank" class="hover:text-green-400 transition-colors block">linkedin.com/in/anderson-cafurica-</a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-green-500/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+            <p>&copy; 2026 Anderson Cafurica | PyNerd Angola. Todos os direitos reservados.</p>
+            <p>Feito com <i class="fas fa-heart text-red-500 mx-1"></i> e muito <i class="fas fa-coffee text-yellow-500 mx-1"></i> em Huambo, Angola</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = hamburger.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            const icon = hamburger.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-slate-900/95');
-            } else {
-                navbar.classList.remove('bg-slate-900/95');
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
-    </script>
+    });
+
+    // Scroll animations + skill bars
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Animate skill bars when skills section is visible
+                entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+                    bar.classList.add('animate');
+                });
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+    // Navbar glass on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(15,23,42,.95)';
+        } else {
+            nav.style.background = '';
+        }
+    });
+</script>
 </body>
 </html>
